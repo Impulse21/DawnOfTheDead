@@ -20,14 +20,15 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		processRotation();	
+        
+        processRotation();
     }
 	
 	// Update called at a fix rate
 	void FixedUpdate()
 	{
-		processMovement();	
-	}
+        processMovement();
+    }
 
 	protected void processMovement()
 	{
@@ -41,16 +42,21 @@ public class PlayerController : MonoBehaviour
 
 	protected void processRotation()
 	{
-		//float aimX = Input.GetAxis("AimX");
-		//float aimY = Input.GetAxis("AimY");        
+		float aimX = Input.GetAxis("AimX");
+		float aimY = Input.GetAxis("AimY");        
 
 		//Vector3 target = new Vector3(aimX, aimY, 0.0f);
 
 		Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		//Debug.Log("Target location (" + target.x + ", " + target.y + ")");
+		Debug.Log("Target location (" + target.x + ", " + target.y + ", " + target.z + ")");
+
+        target.x += transform.position.x;
+        target.y += transform.position.y;
+        target.z = -100;
 
 		Vector3 vectorToTarget = target - transform.position;
 		//Debug.Log("Vector to target (" + vectorToTarget.x + ", " + vectorToTarget.y +")");
+        
 
 		rotateToTarget(vectorToTarget);
 
