@@ -20,14 +20,13 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-        processMovement();
-        processRotation();
+		processRotation();	
     }
 	
 	// Update called at a fix rate
 	void FixedUpdate()
 	{
-		
+		processMovement();	
 	}
 
 	protected void processMovement()
