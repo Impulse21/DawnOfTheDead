@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
 	public float TurnRate;
 	public float Speed;
 
+	[Header("Movement Debug")]
+	public GameObject targetRotation;
+
 	// Private varables
 	private Rigidbody2D rigidBody;
 
@@ -16,7 +19,7 @@ public class PlayerController : MonoBehaviour
 	{
 		rigidBody = GetComponent<Rigidbody2D>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -41,18 +44,27 @@ public class PlayerController : MonoBehaviour
 
 	protected void processRotation()
 	{
+		if(targetRotation == null)
+		{
+			return;
+		}
+
 		float aimX = Input.GetAxis("AimX");
 		float aimY = Input.GetAxis("AimY");
 
-		Vector3 target = new Vector3(aimX, aimY, 0.0f);
+		//Vector3 target = new Vector3(aimX, aimY, 0.0f);
+		Vector3 target = targetRotation.transform.position;
 		Debug.Log("Target location (" + target.x + ", " + target.y + ")");
 
-		Vector3 vectorToTarget = (target - transform.position).normalized;
+		Vector3 vectorToTarget = target - transform.position;
 		Debug.Log("Vector to target (" + vectorToTarget.x + ", " + vectorToTarget.y +")");
 
-		float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
-		Debug.Log("Angle is " + angle);
-		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		Quaternion rot = Quaternion.LookRotation(transform.position - target, Vector3.forward);
+		transform.rotation = rot;
+
+		/* Here we are limiting rotation to only the Z Axis 				*/
+		transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
+		rigidBody.angularVelocity = 0;
 	}
 }
 
