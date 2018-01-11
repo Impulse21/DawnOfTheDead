@@ -14,14 +14,13 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		rigidBody = GetComponent<Rigidbody2D>();
+		rigidBody = GetComponent<Rigidbody2D>();        
 	}
 
 	// Update is called once per frame
 	void Update () 
-	{
-        
-        processRotation();
+	{        
+        processRotation();        
     }
 	
 	// Update called at a fix rate
@@ -47,30 +46,23 @@ public class PlayerController : MonoBehaviour
 
 		//Vector3 target = new Vector3(aimX, aimY, 0.0f);
 
-		Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Debug.Log("Target location (" + target.x + ", " + target.y + ", " + target.z + ")");
+		Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);        
 
         target.x += transform.position.x;
         target.y += transform.position.y;
-        target.z = -100;
 
-		Vector3 vectorToTarget = target - transform.position;
-		//Debug.Log("Vector to target (" + vectorToTarget.x + ", " + vectorToTarget.y +")");
-        
+		Vector3 vectorToTarget = target - transform.position;        
 
 		rotateToTarget(vectorToTarget);
-
 	}
 
 	protected void rotateToTarget(Vector3 target)
 	{
-        //Quaternion rot = Quaternion.LookRotation(target, Vector3.forward);
         transform.LookAt(target,Vector3.forward);
-        //transform.rotation = rot;
 
-		/* Here we are limiting rotation to only the Z Axis 				*/
-		//transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
-		//rigidBody.angularVelocity = 0;
-	}
+        //Lock any other rotation
+        Vector3 lockVector = new Vector3(0, 0, -transform.eulerAngles.z);
+        transform.eulerAngles = lockVector;        
+    }
 }
 
