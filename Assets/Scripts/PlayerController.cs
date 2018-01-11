@@ -8,9 +8,6 @@ public class PlayerController : MonoBehaviour
 	public float TurnRate;
 	public float Speed;
 
-	[Header("Movement Debug")]
-	public GameObject targetRotation;
-
 	// Private varables
 	private Rigidbody2D rigidBody;
 
@@ -44,21 +41,23 @@ public class PlayerController : MonoBehaviour
 
 	protected void processRotation()
 	{
-		if(targetRotation == null)
-		{
-			return;
-		}
-
 		float aimX = Input.GetAxis("AimX");
 		float aimY = Input.GetAxis("AimY");
 
 		//Vector3 target = new Vector3(aimX, aimY, 0.0f);
-		Vector3 target = targetRotation.transform.position;
+
+		Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Debug.Log("Target location (" + target.x + ", " + target.y + ")");
 
 		Vector3 vectorToTarget = target - transform.position;
 		Debug.Log("Vector to target (" + vectorToTarget.x + ", " + vectorToTarget.y +")");
 
+		rotateToTarget(vectorToTarget);
+
+	}
+
+	protected void rotateToTarget(Vector3 target)
+	{
 		Quaternion rot = Quaternion.LookRotation(transform.position - target, Vector3.forward);
 		transform.rotation = rot;
 
