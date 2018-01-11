@@ -45,9 +45,13 @@ public class PlayerController : MonoBehaviour
 		float aimY = Input.GetAxis("AimY");
 
 		Vector3 target = new Vector3(aimX, aimY, 0.0f);
+		Debug.Log("Target location (" + target.x + ", " + target.y + ")");
+
 		Vector3 vectorToTarget = (target - transform.position).normalized;
+		Debug.Log("Vector to target (" + vectorToTarget.x + ", " + vectorToTarget.y +")");
 
 		float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+		Debug.Log("Angle is " + angle);
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 	}
 }
