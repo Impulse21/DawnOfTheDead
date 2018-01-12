@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
 	public float TurnRate;
 	public float Speed;
 
+    [Header("Fire")]
+    public float WeaponRange = 100;
+
 	// Private varables
 	private Rigidbody2D rigidBody;
 
@@ -28,13 +31,28 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-        processAim();        
+        processAim();
+
+        // Handle XBox Trigger
+        bool fire = (Input.GetAxis("Fire1") > 0);
+
+        if(fire)
+        {
+            fireWeapon();
+        }
     }
 	
 	// Update called at a fix rate
 	void FixedUpdate()
 	{
         processMovement();
+    }
+
+    protected void fireWeapon()
+    {
+        Debug.Log("Start Location (" + transform.position.x + ", " + transform.position.y  + ", " + transform.position.z + "),  " +
+            "End Location(" + transform.up.x * WeaponRange + ", " + transform.up.y * WeaponRange + ", " + transform.up.z * WeaponRange + ")");
+        Debug.DrawRay(transform.position, transform.up * WeaponRange, Color.red, 20, false);
     }
 
 	protected void processMovement()
