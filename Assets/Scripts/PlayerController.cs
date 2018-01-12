@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EAimInputType
+{
+    Mouse,
+    Joystick
+}
+
 public class PlayerController : MonoBehaviour 
 {
-	[Header("Movement")]
+    public EAimInputType aimInputType = EAimInputType.Joystick;
+
+    [Header("Movement")]
 	public float TurnRate;
 	public float Speed;
 
@@ -19,8 +27,8 @@ public class PlayerController : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () 
-	{        
-        processRotation();        
+	{
+        processAim();        
     }
 	
 	// Update called at a fix rate
@@ -39,30 +47,51 @@ public class PlayerController : MonoBehaviour
 		rigidBody.velocity = movement.normalized * Speed;
 	}
 
-	protected void processRotation()
+	protected void processAim()
 	{
-		float aimX = Input.GetAxis("AimX");
-		float aimY = Input.GetAxis("AimY");        
+        switch(aimInputType)
+        {
+        case EAimInputType.Joystick:
+            handleJoystickAim();
+            break;
+        default:
+            handleMouseAim();
+            break;
+        }
+	}
 
-		//Vector3 target = new Vector3(aimX, aimY, 0.0f);
-
-		Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);        
+    protected void handleMouseAim()
+    {
+        Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         target.x += transform.position.x;
         target.y += transform.position.y;
 
-		Vector3 vectorToTarget = target - transform.position;        
+        Vector3 vectorToTarget = target - transform.position;
 
-		rotateToTarget(vectorToTarget);
-	}
+        rotateToTarget(vectorToTarget);
+    }
 
-	protected void rotateToTarget(Vector3 target)
-	{
-        transform.LookAt(target,Vector3.forward);
+    protected void rotateToTarget(Vector3 target)
+    {
+        transform.LookAt(target, Vector3.forward);
 
         //Lock any other rotation
         Vector3 lockVector = new Vector3(0, 0, -transform.eulerAngles.z);
-        transform.eulerAngles = lockVector;        
+        transform.eulerAngles = lockVector;
+    }
+
+    private void handleJoystickAim()
+    {
+        float aimX = Input.GetAxis("AimX");
+        float aimY = Input.GetAxis("AimY");
+
+        Vector3 aimDir = new Vector3(aimX, aimY, 0.0f);
+
+        if (aimDir != Vector3.zero)
+        {
+            transform.up = aimDir;
+        }
     }
 }
 
