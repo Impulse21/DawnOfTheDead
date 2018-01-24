@@ -21,6 +21,7 @@ public class HitScanWeaponFire : BaseWeaponFire
  		shootRay.origin = transform.position;
         shootRay.direction = transform.TransformDirection(Vector3.up);
 
+        Debug.DrawRay(shootRay.origin, shootRay.direction * range, Color.red, 4.0f);
         if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
         {
             Debug.Log("We hit something");
