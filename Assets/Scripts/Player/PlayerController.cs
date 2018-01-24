@@ -8,7 +8,7 @@ public enum EAimInputType
     Joystick
 }
 
-public class PlayerController : MonoBehaviour 
+public class PlayerController : MonoBehaviour , IDamageable
 {
     public EAimInputType aimInputType = EAimInputType.Joystick;
 
@@ -95,6 +95,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.up = aimDir;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Debug.Log("Player took damage [" + damage.ToString() + "]");
     }
 }
 

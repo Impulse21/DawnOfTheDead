@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
+	
 	public int health = 100; 	// Starting health
 
 	int m_currentHealth;
 	bool isDead = false;
+	
 
 	// Use this for initialization
 	void Start () 
@@ -24,6 +26,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 	// Update is called once per frame
 	void Update () 
 	{
+		
 	}
 
 
@@ -44,7 +47,6 @@ public class EnemyController : MonoBehaviour, IDamageable
 		}
 	}
 
-	
 	void Death()
 	{
 		isDead = true;

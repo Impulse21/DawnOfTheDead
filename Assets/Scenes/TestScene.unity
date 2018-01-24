@@ -152,6 +152,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114934084538150844, guid: 892826189566a4aad9ca79008df55930,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1096873141}
+    - target: {fileID: 114934084538150844, guid: 892826189566a4aad9ca79008df55930,
+        type: 2}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 892826189566a4aad9ca79008df55930, type: 2}
   m_IsPrefabParent: 0
@@ -160,23 +170,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1548622271180380, guid: 892826189566a4aad9ca79008df55930,
     type: 2}
   m_PrefabInternal: {fileID: 347758588}
---- !u!95 &1096873146
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1096873141}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6c136554d402a4a5e8d084534da971b6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1107334264
 GameObject:
   m_ObjectHideFlags: 0
