@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class HitScanWeaponFire : BaseWeaponFire 
 {
-    Ray shootRay = new Ray();                       // A ray from the gun end forwards.
-    RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
     int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
 
     void Awake ()
     {
+        shootableMask = LayerMask.GetMask("Shootable");
 	}
 
 	public override void Shoot()
 	{
-		shootableMask = LayerMask.GetMask("Shootable");
+        Vector2 fwd = transform.TransformDirection(Vector2.up);
 
- 		shootRay.origin = transform.position;
-        shootRay.direction = transform.TransformDirection(Vector3.up);
-
-        Debug.DrawRay(shootRay.origin, shootRay.direction * range, Color.red, 1.0f);
-        Debug.Log("Orign: " + shootRay.origin.ToString() + " Direction: " + shootRay.direction.ToString());
-        if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, fwd, range, shootableMask, -1);
+		
+        if(hit.collider != null)
         {
-            Debug.Log("We hit something");
-            // Try and find an EnemyHealth script on the gameobject hit.
-        	IDamageable enemy = shootHit.collider.GetComponent <IDamageable> ();
+        	IDamageable enemy = hit.collider.GetComponent <IDamageable> ();
             enemy.TakeDamage(10.0f);
+
+            // Get collision location
+            Vector2 distance = new Vector2(hit.point.x - transform.position.x, hit.point.y - transform.position.y);
+            Debug.DrawRay(transform.position, fwd * distance.magnitude, Color.red, 5.0f);
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, fwd * range, Color.red, 1.0f);
         }
 	}
 	protected override void DisableAffects()
