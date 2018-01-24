@@ -14,14 +14,13 @@ public class HitScanWeaponFire : BaseWeaponFire
 
 	public override void Shoot()
 	{
-        Debug.Log("Shooting Weapon");
-
 		shootableMask = LayerMask.GetMask("Shootable");
 
  		shootRay.origin = transform.position;
         shootRay.direction = transform.TransformDirection(Vector3.up);
 
-        Debug.DrawRay(shootRay.origin, shootRay.direction * range, Color.red, 4.0f);
+        Debug.DrawRay(shootRay.origin, shootRay.direction * range, Color.red, 1.0f);
+        Debug.Log("Orign: " + shootRay.origin.ToString() + " Direction: " + shootRay.direction.ToString());
         if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
         {
             Debug.Log("We hit something");
