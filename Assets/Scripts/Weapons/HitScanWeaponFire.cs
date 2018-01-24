@@ -19,11 +19,7 @@ public class HitScanWeaponFire : BaseWeaponFire
 		shootableMask = LayerMask.GetMask("Shootable");
 
  		shootRay.origin = transform.position;
-        shootRay.direction = transform.up;
-
-		// Perform the raycast against gameobjects on the shootable layer and if it hits something...
-        Debug.DrawRay(shootRay.origin, shootRay.direction * range, Color.red, 10.0f);
-        Debug.Log("Origin:" + shootRay.origin.ToString() + " Direction: " + shootRay.direction.ToString());
+        shootRay.direction = transform.TransformDirection(Vector3.up);
 
         if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
         {
