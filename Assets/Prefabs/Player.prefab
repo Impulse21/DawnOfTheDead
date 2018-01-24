@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 4978237715496390}
   - component: {fileID: 212078425737140492}
   - component: {fileID: 114059993838726324}
-  - component: {fileID: 95136866706507604}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -126,23 +125,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.18
---- !u!95 &95136866706507604
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1554467386254996}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c630317513e254430bede6c03a417ca0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114059993838726324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,7 +140,6 @@ MonoBehaviour:
   timeBetweenBullets: 0.15
   range: 100
   effectsDisplayTime: 0.2
-  WeaponFlash: {fileID: 0}
 --- !u!114 &114200565624971492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,8 +230,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1904200799
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300134, guid: 285a34309ff875c43a2f577fba1d7eea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

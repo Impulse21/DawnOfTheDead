@@ -20,7 +20,7 @@ public class HitScanWeaponFire : BaseWeaponFire
         if(hit.collider != null)
         {
         	IDamageable enemy = hit.collider.GetComponent <IDamageable> ();
-            enemy.TakeDamage(10.0f);
+            enemy.TakeDamage(damagePerShot);
 
             // Get collision location
             Vector2 distance = new Vector2(hit.point.x - transform.position.x, hit.point.y - transform.position.y);
