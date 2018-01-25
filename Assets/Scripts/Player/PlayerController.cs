@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour , IDamageable
 	{
 		float horizontalMov = Input.GetAxis("Horizontal");
 		float verticalMov = Input.GetAxis("Vertical");
-        
+
 		Vector2 movement = new Vector2(horizontalMov, verticalMov);
 
 		m_rigidBody.velocity = movement.normalized * speed;

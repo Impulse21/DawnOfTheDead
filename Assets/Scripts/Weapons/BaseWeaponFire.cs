@@ -12,11 +12,13 @@ public abstract class BaseWeaponFire : MonoBehaviour
 	public abstract void Shoot();
 	protected abstract void DisableAffects();
 
+    Animator m_animator;
+
 	/** End Abstract methods 	*/
 	// Use this for initialization
 	void Start () 
 	{
-		
+		m_animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -28,8 +30,11 @@ public abstract class BaseWeaponFire : MonoBehaviour
 		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             // ... shoot the gun.
-             Shoot ();
-			 timer = 0;
+			if (m_animator != null)
+				m_animator.SetTrigger("Fire");
+				
+            Shoot ();
+			timer = 0;
         }
 
 		if(timer >= timeBetweenBullets * effectsDisplayTime)

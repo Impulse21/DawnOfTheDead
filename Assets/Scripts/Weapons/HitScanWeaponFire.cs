@@ -5,7 +5,6 @@ using UnityEngine;
 public class HitScanWeaponFire : BaseWeaponFire 
 {
     int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
-
     void Awake ()
     {
         shootableMask = LayerMask.GetMask("Shootable");
