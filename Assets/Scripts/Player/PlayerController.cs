@@ -19,24 +19,43 @@ public class PlayerController : MonoBehaviour , IDamageable
     [Header("Fire")]
     public float WeaponRange = 100;
 
+    [Header("Health")]
+    public int Health = 100;
+
 	// Private varables
-	private Rigidbody2D rigidBody;
+	Rigidbody2D m_rigidBody;
+
+    int currentHealth;
+
+    bool isDead;
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
-		rigidBody = GetComponent<Rigidbody2D>();        
+		m_rigidBody = GetComponent<Rigidbody2D>();   
+        currentHealth = Health; 
+        isDead = false;   
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
+        if(isDead)
+        {
+            return;
+        }
+
         processAim();
     }
 	
 	// Update called at a fix rate
 	void FixedUpdate()
 	{
+        if(isDead)
+        {
+            return;
+        }
+
         processMovement();
     }
 
@@ -44,10 +63,10 @@ public class PlayerController : MonoBehaviour , IDamageable
 	{
 		float horizontalMov = Input.GetAxis("Horizontal");
 		float verticalMov = Input.GetAxis("Vertical");
-
+        
 		Vector2 movement = new Vector2(horizontalMov, verticalMov);
 
-		rigidBody.velocity = movement.normalized * Speed;
+		m_rigidBody.velocity = movement.normalized * Speed;
 	}
 
 	protected void processAim()
@@ -99,7 +118,23 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     public void TakeDamage(int damage)
     {
+        if(isDead)
+        {
+            return;
+        }
+
         Debug.Log("Player took damage [" + damage.ToString() + "]");
+        currentHealth -= damage;
+        Debug.Log(currentHealth);
+        if(currentHealth <= 0)
+        {
+            Dead();
+        }
+    }
+
+    private void Dead()
+    {
+        isDead = true;
     }
 }
 

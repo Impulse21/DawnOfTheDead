@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
 		// TODO DMG auto
 		m_currentHealth -= dmg;
-		Debug.Log("Player Took Dmg [" + m_currentHealth.ToString() + "]");
+		Debug.Log("Enemy Took Dmg [" + m_currentHealth.ToString() + "]");
 
 		if(m_currentHealth <= 0)
 		{
@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 		isDead = true;
 		gameObject.SetActive(false);
 
-		Debug.Log("Player is Dead");   
+		Debug.Log("Enemy is Dead");   
 		// TODO Set Collider to trigger
 		// Play Death Audio
 		// Expolode
