@@ -16,7 +16,7 @@ public abstract class BaseWeaponFire : MonoBehaviour
 
 	/** End Abstract methods 	*/
 	// Use this for initialization
-	void Start () 
+	virtual protected void Start () 
 	{
 		m_animator = GetComponent<Animator>();
 	}
