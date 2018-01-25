@@ -8,7 +8,7 @@ public class BaseAttack : MonoBehaviour
 
 	protected Animator m_animator;
 	// Use this for initialization
-	void Awake () 
+	protected virtual void Awake () 
 	{
 		m_animator = GetComponent<Animator>();
 	}

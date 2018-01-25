@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum EAimInputType
 {
@@ -13,14 +14,15 @@ public class PlayerController : MonoBehaviour , IDamageable
     public EAimInputType aimInputType = EAimInputType.Joystick;
 
     [Header("Movement")]
-	public float TurnRate;
-	public float Speed;
+	public float turnRate;
+	public float speed;
 
     [Header("Fire")]
-    public float WeaponRange = 100;
+    public float weaponRange = 100;
 
     [Header("Health")]
-    public int Health = 100;
+    public int health = 100;
+    public Slider healthBar;
 
 	// Private varables
 	Rigidbody2D m_rigidBody;
@@ -33,7 +35,12 @@ public class PlayerController : MonoBehaviour , IDamageable
 	void Awake () 
 	{
 		m_rigidBody = GetComponent<Rigidbody2D>();   
-        currentHealth = Health; 
+        currentHealth = health; 
+
+        healthBar.maxValue = health;
+        healthBar.minValue = 0;
+        healthBar.value = currentHealth;
+
         isDead = false;   
 	}
 
@@ -66,7 +73,7 @@ public class PlayerController : MonoBehaviour , IDamageable
         
 		Vector2 movement = new Vector2(horizontalMov, verticalMov);
 
-		m_rigidBody.velocity = movement.normalized * Speed;
+		m_rigidBody.velocity = movement.normalized * speed;
 	}
 
 	protected void processAim()
@@ -125,7 +132,9 @@ public class PlayerController : MonoBehaviour , IDamageable
 
         Debug.Log("Player took damage [" + damage.ToString() + "]");
         currentHealth -= damage;
-        Debug.Log(currentHealth);
+
+        healthBar.value = currentHealth;
+
         if(currentHealth <= 0)
         {
             Dead();
@@ -134,7 +143,7 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     private void Dead()
     {
-        isDead = true;
+        //isDead = true;
     }
 }
 
