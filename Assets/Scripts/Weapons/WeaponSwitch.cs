@@ -13,7 +13,17 @@ public class WeaponSwitch : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		
+
+		if(Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			selectedWeapon = 0;
+			SelectWeapon();
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			selectedWeapon = 1;
+			SelectWeapon();
+		}
 	}
 
 	void SelectWeapon()
