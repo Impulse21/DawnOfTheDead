@@ -574,13 +574,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c290c22320724436d89bdec6c5895745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 20
-  timeBetweenBullets: 0.15
+  damagePerShot: 50
+  timeBetweenBullets: 1
   range: 100
   effectsDisplayTime: 0.2
   projectile: {fileID: 1063435273787574, guid: adc350bd5689d4c7eb802f6ae23c0409, type: 2}
   poolSize: 20
-  projectileSpeed: 100
+  projectileSpeed: 5
 --- !u!1 &1107334264
 GameObject:
   m_ObjectHideFlags: 0
