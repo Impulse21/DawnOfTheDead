@@ -9,11 +9,14 @@ public class MoveTowardsPlayer : MonoBehaviour
 
 	public float stopDistance = 1;
 
+	Animator m_animator;
+
 	Transform playerTransform;
 	// Use this for initialization
 	void Awake () 
 	{
 		playerTransform = GameObject.FindGameObjectWithTag ("Player").transform;
+		m_animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -33,7 +36,14 @@ public class MoveTowardsPlayer : MonoBehaviour
 			{
 				float step = speed * Time.deltaTime;
 				transform.position = Vector3.MoveTowards(transform.position, target, step);
+				m_animator.SetBool("IsWalking", true);
 			}
+			else
+			{
+				m_animator.SetBool("IsWalking", false);
+			}
+
+
 		}	
 	}
 }
