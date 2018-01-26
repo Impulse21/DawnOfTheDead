@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HitScanWeaponFire : BaseWeaponFire 
 {
+    public int damagePerShot = 20;                  // The damage inflicted by each bullet.
+    
     public GameObject onHitAffect;
 
     int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
