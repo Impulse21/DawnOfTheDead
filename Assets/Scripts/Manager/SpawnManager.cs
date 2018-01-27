@@ -28,10 +28,14 @@ public class SpawnManager : MonoBehaviour
         {
             return;
         }
-
+        
         int iSpawnLocation = Random.Range(0, spawnPoints.Count);
-        GameObject spawmObj = spawnPool.getPooledObject();
-        Instantiate(spawmObj, spawnPoints[iSpawnLocation]);
+        GameObject spawnObj = spawnPool.getPooledObject();
+
+        Debug.Log("Spawning object [" + spawnObj.name + ", " + spawnPoints[iSpawnLocation].position + "]");
+        spawnObj.transform.position = spawnPoints[iSpawnLocation].position;
+        spawnObj.transform.rotation = spawnPoints[iSpawnLocation].rotation;
+        spawnObj.SetActive(true);
     }
 
 }
