@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 
 		// TODO DMG auto
 		m_currentHealth -= dmg;
-		Debug.Log("Enemy Took Dmg [" + m_currentHealth.ToString() + "]");
+		Debug.Log("Enemy " + gameObject.name + " took Dmg [" + m_currentHealth.ToString() + "]");
 
 		if(m_currentHealth <= 0)
 		{

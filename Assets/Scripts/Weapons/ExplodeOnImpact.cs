@@ -3,9 +3,7 @@
 public class ExplodeOnImpact : MonoBehaviour
 {
     public uint impactDamage;
-    public int damageFalloffRate;
-    public uint damageRadius;
-    public uint criticalDamageRadius;
+    public float damageRadius;
 
     public GameObject explosion;
 
@@ -25,9 +23,14 @@ public class ExplodeOnImpact : MonoBehaviour
     void Explode()
     {
         GameObject explosionInstace = Instantiate(explosion, transform.position, transform.rotation);
+        DealAreaDamage();
         gameObject.SetActive(false);
     }
 
+    /**
+     * The damage calculation is as follows:
+     *      DeltaDamage = BaseDamage - (BaseDamage * [ Distance / Radius ]);
+     */
     void DealAreaDamage()
     {
         var colls = Physics2D.OverlapCircleAll(transform.position, damageRadius, LayerMask.GetMask("Shootable"), -1);
@@ -37,9 +40,21 @@ public class ExplodeOnImpact : MonoBehaviour
             if(col.gameObject.tag.Equals("Enemy"))
             {
                 var distance = Vector2.Distance(col.transform.position, transform.position);
-                //var damage = (dist)
+
+                int damage = (int) (impactDamage -  impactDamage * (distance / damageRadius));
+
+                IDamageable enemy = col.gameObject.GetComponent<IDamageable>();
+
+                if(enemy != null)
+                {
+                    Debug.Log("Explosion has hit someone");
+                    enemy.TakeDamage(damage);
+                }
+                else
+                {
+                    Debug.Log("The collided shootable object does not implement damage interface");
+                }
             }
         }
-        
     }
 }

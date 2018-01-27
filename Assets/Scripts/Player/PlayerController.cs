@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     int currentHealth;
 
-    bool isDead;
+    bool bDead;
 
 	// Use this for initialization
 	void Awake () 
@@ -39,13 +39,13 @@ public class PlayerController : MonoBehaviour , IDamageable
         healthBar.minValue = 0;
         healthBar.value = currentHealth;
 
-        isDead = false;   
+        bDead = false;   
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-        if(isDead)
+        if(bDead)
         {
             return;
         }
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour , IDamageable
 	// Update called at a fix rate
 	void FixedUpdate()
 	{
-        if(isDead)
+        if(bDead)
         {
             return;
         }
@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     public void TakeDamage(int damage)
     {
-        if(isDead)
+        if(bDead)
         {
             return;
         }
@@ -139,9 +139,16 @@ public class PlayerController : MonoBehaviour , IDamageable
         }
     }
 
+    public bool IsDead()
+    {
+        return bDead;
+    }
+
     private void Dead()
     {
         //isDead = true;
     }
+
+ 
 }
 

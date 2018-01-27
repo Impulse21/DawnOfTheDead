@@ -22,7 +22,6 @@ public class CleanUpOnAnimationFinsh : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Done"))
         {
-            Debug.Log("Cleaning Up");
             Destroy(gameObject);
         }
     }

@@ -120,8 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9a310652a0f4b9ab55677ca1922efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactDamage: 30
+  damageRadius: 1
   explosion: {fileID: 1190439745215766, guid: 57fdbe373447a4f7b8515b47c5d71159, type: 2}
-  lifespan: 1
 --- !u!212 &212234913824467876
 SpriteRenderer:
   m_ObjectHideFlags: 1
