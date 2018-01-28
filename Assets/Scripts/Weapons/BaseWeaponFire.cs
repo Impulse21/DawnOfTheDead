@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
+public enum AmmoType
+{
+    Bullet,
+    Fire
+}
+
 public abstract class BaseWeaponFire : MonoBehaviour 
 {
-    public bool unlimitedShots;
-    public uint maxAmmo;
-    public uint startingAmmo;
+    AmmoManager ammoManager;                        // Reference to the Ammo Manager
     public float timeBetweenBullets = 0.15f;        // The time between each shot.
     public float range = 100f;                      // The distance the gun can fire.
 	public float effectsDisplayTime	= 0.2f;			// The delay between effects
@@ -21,10 +26,8 @@ public abstract class BaseWeaponFire : MonoBehaviour
 	virtual protected void Start () 
 	{
         timer = 0;
-        startingAmmo = (uint) Mathf.Clamp(startingAmmo, 0, maxAmmo);
-        currentAmmoCount = startingAmmo;
     }
-	
+
 	// Update is called once per frame
 	void Update () 
 	{

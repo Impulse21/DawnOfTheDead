@@ -28,8 +28,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 	{
 		
 	}
-
-
+    
 	public void TakeDamage(int dmg)
 	{
 		if(isDead)
@@ -52,7 +51,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 		isDead = true;
 		gameObject.SetActive(false);
 
-		Debug.Log("Enemy is Dead");   
+		Debug.Log("Enemy " + gameObject.name + " is Dead");   
 		// TODO Set Collider to trigger
 		// Play Death Audio
 		// Expolode

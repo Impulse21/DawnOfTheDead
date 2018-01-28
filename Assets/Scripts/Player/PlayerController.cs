@@ -144,11 +144,23 @@ public class PlayerController : MonoBehaviour , IDamageable
         return bDead;
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Pickupable"))
+        {
+            Debug.Log("Player has picked up an object [" + collision.gameObject.name + "]");
+            collision.gameObject.SetActive(false);
+
+            // Send message to all child objects to ensure ammo is updated
+            AmmoPickup ammoPickup = collision.GetComponent<AmmoPickup>();
+            BroadcastMessage("OnAmmoPickup", ammoPickup);
+        }
+    }
+
     private void Dead()
     {
         //isDead = true;
     }
 
- 
 }
 
