@@ -10,6 +10,7 @@ public enum AmmoType
 public abstract class BaseWeaponFire : MonoBehaviour 
 {
     AmmoManager ammoManager;                        // Reference to the Ammo Manager
+    public AmmoType ammoType;                       // Ammo type for this wepaon
     public float timeBetweenBullets = 0.15f;        // The time between each shot.
     public float range = 100f;                      // The distance the gun can fire.
 	public float effectsDisplayTime	= 0.2f;			// The delay between effects
@@ -61,7 +62,7 @@ public abstract class BaseWeaponFire : MonoBehaviour
 
     bool HasAmmo()
     {
-        if(unlimitedShots)
+        if(ammoManager.HasAmmo(ammoType))
         {
             return true;
         }
