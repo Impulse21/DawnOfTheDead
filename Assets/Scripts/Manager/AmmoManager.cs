@@ -28,6 +28,7 @@ public class AmmoManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Creating Ammo Manager");
         sharedInstance = this;
 
         ammoData = new Dictionary<AmmoType, AmmoInfo>();
