@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct AmmoInfo
 {
     public AmmoType type;
+    public Sprite UiSprite;
     public bool unlimited;
     public uint max;
     public uint currentCount;
@@ -13,12 +15,23 @@ public struct AmmoInfo
 
 public class AmmoManager : MonoBehaviour
 {
+    public static AmmoManager sharedInstance;
+
+    public Text ammoText;
+    public Image ammoImage;
+
     public List<AmmoInfo> ammoInfo;
+
+    AmmoInfo activeAmmo;
 
     Dictionary<AmmoType, AmmoInfo>  ammoData;
 
     private void Start()
     {
+        sharedInstance = this;
+
+        ammoData = new Dictionary<AmmoType, AmmoInfo>();
+
         foreach (AmmoInfo info in ammoInfo)
         {
             try
@@ -33,12 +46,24 @@ public class AmmoManager : MonoBehaviour
 
     }
 
+    public void SetSelected(AmmoType ammoType)
+    {
+        if (ammoData.TryGetValue(ammoType, out activeAmmo))
+        {
+            updateUIInfo(activeAmmo);
+        }
+        else
+        {
+            Debug.LogWarning("Item Type does not exists in the manager [" + ammoType.ToString() + "]");
+        }
+    }
+
     public bool HasAmmo(AmmoType ammoType)
     {
         AmmoInfo value;
         if(ammoData.TryGetValue(ammoType, out value))
         {
-            return (value.currentCount < 0 || value.unlimited);
+            return (value.unlimited || value.currentCount > 0);
         }
         else
         {
@@ -59,6 +84,7 @@ public class AmmoManager : MonoBehaviour
             else
             {
                 value.currentCount--;
+                ammoData[ammoType] = value;
             }
         }
     }
@@ -70,11 +96,31 @@ public class AmmoManager : MonoBehaviour
         {
             Debug.Log("Ammo has increaed for " + ammoPickup.type);
             value.currentCount = (uint)Mathf.Clamp(ammoPickup.count, 0, value.max);
+            ammoData[ammoPickup.type] = value;
+
+            updateUiAmmoAmmount(value);
         }
         else
         {
             Debug.LogWarning("Item Type does not exists in the manager [" + ammoPickup.type.ToString() + "]");
         }
+    }
 
+    public void updateUIInfo(AmmoInfo ammoInfo)
+    {
+        updateUiAmmoAmmount(ammoInfo);
+
+        if (ammoImage != null)
+        {
+            ammoImage.sprite = ammoInfo.UiSprite;
+        }
+    }
+
+    private void updateUiAmmoAmmount(AmmoInfo ammoInfo)
+    {
+        if (ammoText != null)
+        {
+            ammoText.text = (ammoInfo.unlimited) ? "--" : ammoInfo.currentCount.ToString() + "/" + ammoInfo.max.ToString();
+        }
     }
 }
