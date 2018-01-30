@@ -3,14 +3,12 @@
 public class WeaponSwitch : MonoBehaviour
 {
 	public uint selectedWeapon = 0;
+	public AmmoManager ammoManager;		// Reference to Ammo Manager
 
-	
-	protected AmmoManager ammoManager;
+
 	// Use this for initialization
 	void Start () 
 	{
-		ammoManager = AmmoManager.sharedInstance;
-
 		if(ammoManager == null)
 		{
 			Debug.LogWarning("Ammo Manager is null");
@@ -45,7 +43,7 @@ public class WeaponSwitch : MonoBehaviour
 
 				if(weaponFire != null)
 				{
-					//AmmoManager.sharedInstance.SetSelected(weaponFire.ammoType);
+					ammoManager.SetSelected(weaponFire.ammoType);
 				}
 				else
 				{

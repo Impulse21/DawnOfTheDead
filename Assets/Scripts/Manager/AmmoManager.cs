@@ -15,7 +15,7 @@ public struct AmmoInfo
 
 public class AmmoManager : MonoBehaviour
 {
-    public static AmmoManager sharedInstance;
+    //public static AmmoManager sharedInstance;
 
     public Text ammoText;
     public Image ammoImage;
@@ -28,9 +28,6 @@ public class AmmoManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Creating Ammo Manager");
-        sharedInstance = this;
-
         ammoData = new Dictionary<AmmoType, AmmoInfo>();
 
         foreach (AmmoInfo info in ammoInfo)
@@ -86,6 +83,7 @@ public class AmmoManager : MonoBehaviour
             {
                 value.currentCount--;
                 ammoData[ammoType] = value;
+                updateUiAmmoAmmount(ammoData[ammoType]);
             }
         }
     }
@@ -99,7 +97,10 @@ public class AmmoManager : MonoBehaviour
             value.currentCount = (uint)Mathf.Clamp(ammoPickup.count, 0, value.max);
             ammoData[ammoPickup.type] = value;
 
-            updateUiAmmoAmmount(value);
+            if(activeAmmo.type == ammoPickup.type)
+            {
+                updateUiAmmoAmmount(value);
+            }
         }
         else
         {

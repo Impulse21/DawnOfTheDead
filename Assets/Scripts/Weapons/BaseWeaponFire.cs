@@ -9,13 +9,14 @@ public enum AmmoType
 
 public abstract class BaseWeaponFire : MonoBehaviour 
 {
+    public AmmoManager ammoManager;                 // Reference to Ammo Manager                
     public AmmoType ammoType;                       // Ammo type for this wepaon
     public float timeBetweenBullets = 0.15f;        // The time between each shot.
     public float range = 100f;                      // The distance the gun can fire.
 	public float effectsDisplayTime	= 0.2f;			// The delay between effects
 
  	protected float timer;                          // A timer to determine when to fire.
-    protected AmmoManager ammoManager;
+   
 
 	/** Abstract methods 		*/
 	public abstract void Shoot();
@@ -25,7 +26,6 @@ public abstract class BaseWeaponFire : MonoBehaviour
 	// Use this for initialization
 	virtual protected void Start () 
 	{
-        ammoManager = AmmoManager.sharedInstance;
         timer = 0;
     }
 
