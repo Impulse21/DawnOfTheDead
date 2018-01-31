@@ -22,7 +22,13 @@ public class EnemyController : MonoBehaviour, IDamageable
 		m_currentHealth = health;
 		isDead = false;
 	}
-	
+
+    void OnEnable()
+    {
+        m_currentHealth = health;
+        isDead = false;
+    }
+
 	// Update is called once per frame
 	void Update () 
 	{

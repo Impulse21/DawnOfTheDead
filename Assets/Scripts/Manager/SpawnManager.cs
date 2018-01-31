@@ -7,8 +7,8 @@ public class SpawnManager : MonoBehaviour
 {
     public PlayerController player; // Reference to the player controller
     public float spawnTime = 3.0f;
-    public GameObject enemy;
-    public int enemyPoolSize;
+    public GameObject spawnObject;
+    public int spawnObjectPoolSize;
     public List<Transform> spawnPoints;
 
 
@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
 	void Start ()
     {
         Random.InitState( (int) System.DateTime.Now.Ticks );
-        spawnPool = new ObjectPool(enemy, enemyPoolSize, true);
+        spawnPool = new ObjectPool(spawnObject, spawnObjectPoolSize, true);
         InvokeRepeating("Spawn", spawnTime, spawnTime);
 	}
 

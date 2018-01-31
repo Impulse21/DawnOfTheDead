@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class MeleeAttack : BaseAttack 
 {
-	public int damageRate = 2;
+	public float damageRate = 0.5f;
 
 	protected float timer;                          // A timer to determine when to fire.
 
 	bool playerInRange;
-	GameObject player;
+	IDamageable playerDmg;
 
 	protected override void Awake()
 	{
 		base.Awake();
-		player = GameObject.FindGameObjectWithTag ("Player");
+        playerDmg = GameObject.FindGameObjectWithTag ("Player").GetComponent<IDamageable>();
 		playerInRange = false;
 		timer = 0;
 	}
@@ -28,9 +28,9 @@ public class MeleeAttack : BaseAttack
 
 			if(timer >= damageRate)
 			{
-			
-				player.SendMessage("TakeDamage", attackDamage);
-				timer = 0;
+                playerDmg.TakeDamage((int)attackDamage);
+
+                timer = 0;
 			}
 		}
 		else
@@ -40,22 +40,20 @@ public class MeleeAttack : BaseAttack
 	}
 	void OnTriggerEnter2D(Collider2D coll) 
 	{
-    	if (coll.gameObject == player)
+    	if (coll.gameObject.tag == "Player")
 		{
 			playerInRange = true;
 			m_animator.SetBool("IsAttacking", true);
-			Debug.Log("Tigger entered setting player in range");
 		}  
     }
 
 
 	void OnTriggerExit2D(Collider2D coll) 
 	{
-    	if (coll.gameObject == player)
+    	if (coll.gameObject.tag == "Player")
 		{
 			playerInRange = false;
 			m_animator.SetBool("IsAttacking", false);
-			Debug.Log("Tigger Exit");
 		}  
     }	
 }

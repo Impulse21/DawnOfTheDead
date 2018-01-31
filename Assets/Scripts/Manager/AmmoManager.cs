@@ -26,7 +26,7 @@ public class AmmoManager : MonoBehaviour
 
     Dictionary<AmmoType, AmmoInfo>  ammoData = new Dictionary<AmmoType, AmmoInfo>();
 
-    private void Start()
+    private void Awake()
     {
         foreach (AmmoInfo info in ammoInfo)
         {
