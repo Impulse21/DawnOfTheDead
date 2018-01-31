@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     private void Dead()
     {
-        //isDead = true;
+        bDead = true;
     }
 
 }

@@ -24,12 +24,10 @@ public class AmmoManager : MonoBehaviour
 
     AmmoInfo activeAmmo;
 
-    Dictionary<AmmoType, AmmoInfo>  ammoData;
+    Dictionary<AmmoType, AmmoInfo>  ammoData = new Dictionary<AmmoType, AmmoInfo>();
 
     private void Start()
     {
-        ammoData = new Dictionary<AmmoType, AmmoInfo>();
-
         foreach (AmmoInfo info in ammoInfo)
         {
             try
@@ -41,7 +39,6 @@ public class AmmoManager : MonoBehaviour
                 Debug.LogWarning("This item type already exists " + info.type);
             }
         }
-
     }
 
     public void SetSelected(AmmoType ammoType)
