@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IDamageable
 {
 	
-	public int health = 100; 	// Starting health
+	public int health = 100; 		// Starting health
+	public int scoreValue = 10;		// Death score value
 
 	int m_currentHealth;
 	bool isDead = false;
@@ -57,7 +56,8 @@ public class EnemyController : MonoBehaviour, IDamageable
 		isDead = true;
 		gameObject.SetActive(false);
 
-		Debug.Log("Enemy " + gameObject.name + " is Dead");   
+		Debug.Log("Enemy " + gameObject.name + " is Dead"); 
+		ScoreManager.score += scoreValue;  
 		// TODO Set Collider to trigger
 		// Play Death Audio
 		// Expolode
