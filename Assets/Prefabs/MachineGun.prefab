@@ -100,10 +100,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2beec0833ec14748bbab95ea016d450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 20
+  ammoManager: {fileID: 0}
+  ammoType: 0
   timeBetweenBullets: 0.15
   range: 100
   effectsDisplayTime: 0.2
+  damagePerShot: 20
+  onHitAffect: {fileID: 0}
 --- !u!212 &212284411166028168
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -135,8 +138,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1904200799
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300004, guid: d1f6d666f95b78c4097cf6fd0651d5b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
