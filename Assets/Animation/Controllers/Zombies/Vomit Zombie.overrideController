@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Vomit Zombie
+  m_Controller: {fileID: 9100000, guid: 6c136554d402a4a5e8d084534da971b6, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 21ec1501d72984d2c9ab1896ed9ad04e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f354040c66ab047998ac8a7a26baab9d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5a4ea3675e58f44cda47cfc3f992c18c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ff6680ff498d74d42b842bfe42d4f7ae, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8d404276bbd2f4424932e831f5664c6b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: bcf0a72526ed44b0ca23711abb81bc6e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9b0bf9db325394228bb7f8eac2f22a49, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0c5fcfd4542b84b24add537b6385084d, type: 2}
