@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 61956487136209954}
   - component: {fileID: 50607872497417912}
   - component: {fileID: 114036360333503582}
+  - component: {fileID: 114394278018813354}
   m_Layer: 9
   m_Name: Zombie
   m_TagString: Enemy
@@ -137,6 +138,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 10
   damageRate: 0.5
+--- !u!114 &114394278018813354
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548622271180380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622632fea8536594292579cf5dda8c4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 1858002978165438, guid: a42a9f490a0c40e479d9a31486b61bc3, type: 2}
+  dropPercentage: 50
 --- !u!114 &114488208923046728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,6 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  scoreValue: 10
 --- !u!212 &212834744101282390
 SpriteRenderer:
   m_ObjectHideFlags: 1

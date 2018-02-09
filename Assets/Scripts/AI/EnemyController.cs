@@ -6,15 +6,14 @@ public class EnemyController : MonoBehaviour, IDamageable
 	public int health = 100; 		// Starting health
 	public int scoreValue = 10;		// Death score value
 
+    ItemDrop itemDrop;
 	int m_currentHealth;
 	bool isDead = false;
-	
 
-	// Use this for initialization
-	void Start () 
-	{
-		
-	}
+    void Start()
+    {
+        itemDrop = GetComponent<ItemDrop>();
+    }
 
 	void Awake()
 	{
@@ -57,9 +56,18 @@ public class EnemyController : MonoBehaviour, IDamageable
 		gameObject.SetActive(false);
 
 		Debug.Log("Enemy " + gameObject.name + " is Dead"); 
-		ScoreManager.score += scoreValue;  
-		// TODO Set Collider to trigger
-		// Play Death Audio
-		// Expolode
-	}
+		ScoreManager.score += scoreValue;
+        DropItem();
+        // TODO Set Collider to trigger
+        // Play Death Audio
+        // Expolode
+    }
+
+    void DropItem()
+    {
+        if(itemDrop != null)
+        {
+            itemDrop.DropItem();
+        }
+    }
 }
