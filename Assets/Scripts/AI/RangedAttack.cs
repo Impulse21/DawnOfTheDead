@@ -6,21 +6,20 @@ public class RangedAttack : MonoBehaviour
 	public int numOfProjectiles;				// Number of projectiles
 	public bool limitedFire;					// Limit the amount of shots to num of projectiles
 	public int projectileSpeed = 5;				// Projectile Speed
-	public float range = 20;					// Range to start attacking
 	public float fireRate = 2.0f;
+	public string targetTag = "";				// Target to shoot tag
 
 	protected float timer;
 
 	private Animator m_animator;
-	private Transform m_playerTransform;
 	private ObjectPool m_projectilePool; 		// Object Pool for projectile
 	private MoveTowardsPlayer m_movementComp;	// Reference to movement component
-
+	private bool targetInRange;
+	
 	// Use this for initialization
 	void Start () 
 	{
 		timer = 0;
-		m_playerTransform = GameObject.FindGameObjectWithTag ("Player").transform;
 		m_projectilePool = new ObjectPool(projectile, 10, limitedFire);
 		
 		m_movementComp = GetComponent<MoveTowardsPlayer>();
@@ -30,17 +29,13 @@ public class RangedAttack : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		float distanceToPlayer = 
-			Vector3.Distance(m_playerTransform.position, transform.position);
-
-		if(distanceToPlayer <= range)
+		if(targetInRange)
 		{
-			Debug.Log("Player is in range " + distanceToPlayer);
+			Debug.Log("Player is in range");
 			timer += Time.deltaTime;
 
 			if(timer >= fireRate)
 			{
-				signalStopMovement();
 				Shoot();
 				
 				timer = 0;
@@ -48,42 +43,44 @@ public class RangedAttack : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("Player is not in range " + distanceToPlayer);
-			singalStartMovement();
 			timer = 0;
 		}
 	}
 
 	private void Shoot()
 	{
-		m_animator.SetBool("IsAttacking", true);
+		m_animator.SetTrigger("Attack");
 		GameObject fireProjectile = m_projectilePool.getPooledObject();
 		
 		if(fireProjectile != null)
 		{
 			fireProjectile.transform.position = transform.position;
-			fireProjectile.transform.rotation = transform.rotation;
+			// Not sure why I need to do this. Seems to stem from the asset itsself.
+			// This is a temp fix for now
+			fireProjectile.transform.rotation = 
+				transform.rotation * Quaternion.Euler(0, 0, 180);
+
 			fireProjectile.SetActive(true);
 
 			fireProjectile.GetComponent<Rigidbody2D>().velocity = 
 				fireProjectile.transform.up * projectileSpeed;	
 		}
-		m_animator.SetBool("IsAttacking", false);
 	}
 
-	private void signalStopMovement()
+		void OnTriggerEnter2D(Collider2D coll) 
 	{
-		if(m_movementComp != null)
+    	if (coll.gameObject.tag == targetTag)
 		{
-			m_movementComp.enableWalk = false;
-		}
-	}
+			targetInRange = true;
+		}  
+    }
 
-	private void singalStartMovement()
+
+	void OnTriggerExit2D(Collider2D coll) 
 	{
-		if(m_movementComp != null)
+    	if (coll.gameObject.tag == targetTag)
 		{
-			m_movementComp.enableWalk = true;
-		}
-	}
+			targetInRange = false;
+		}  
+    }	
 }

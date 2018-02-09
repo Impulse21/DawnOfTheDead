@@ -8,7 +8,6 @@ public class MoveTowardsPlayer : MonoBehaviour
 	public float speed = 2;			// Players speed
 
 	public float stopDistance = 1;
-	public bool enableWalk {get; set;}
 
 	Animator m_animator;
 
@@ -16,7 +15,6 @@ public class MoveTowardsPlayer : MonoBehaviour
 	// Use this for initialization
 	void Awake () 
 	{
-		enableWalk = true;
 		playerTransform = GameObject.FindGameObjectWithTag ("Player").transform;
 		m_animator = GetComponent<Animator>();
 	}
@@ -34,7 +32,7 @@ public class MoveTowardsPlayer : MonoBehaviour
 			Quaternion q = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 			transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
 		
-			if(vectorToTarget.magnitude >= stopDistance && enableWalk)
+			if(vectorToTarget.magnitude >= stopDistance)
 			{
 				float step = speed * Time.deltaTime;
 				transform.position = Vector3.MoveTowards(transform.position, target, step);
@@ -45,5 +43,11 @@ public class MoveTowardsPlayer : MonoBehaviour
 				m_animator.SetBool("IsWalking", false);
 			}
 		}	
+	}
+
+	// TODO Determine if this is required
+	private bool IsAttacking()
+	{
+		return true;
 	}
 }

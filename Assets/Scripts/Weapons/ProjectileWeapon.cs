@@ -21,7 +21,6 @@ public class ProjectileWeapon : BaseWeaponFire
 	}
 	
 	// Update is called once per frame
-
 	public override void Shoot()
 	{
 		if(projectilePool != null)
