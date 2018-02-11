@@ -1,15 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class ExplodeOnImpact : MonoBehaviour
 {
+    // Tags to explode on
+    public List<string> explodeTags = new List<string>();     
+
     public uint impactDamage;
+
+    // Explosion does damage
+    public bool doesDamage = true;              
     public float damageRadius;
 
     public GameObject explosion;
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag != "Player")
+        if (explodeTags.Contains(coll.gameObject.tag) || coll.gameObject.tag == ("Wall"))
         {
             if (explosion == null)
             {
@@ -37,7 +45,7 @@ public class ExplodeOnImpact : MonoBehaviour
 
         foreach(var col in colls)
         {
-            if(col.gameObject.tag.Equals("Enemy"))
+            if(explodeTags.Contains(col.gameObject.tag))
             {
                 var distance = Vector2.Distance(col.transform.position, transform.position);
 

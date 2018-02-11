@@ -28,6 +28,7 @@ public class MeleeAttack : BaseAttack
 
 			if(timer >= damageRate)
 			{
+				m_animator.SetTrigger("Attack");
                 playerDmg.TakeDamage((int)attackDamage);
 
                 timer = 0;
@@ -46,7 +47,6 @@ public class MeleeAttack : BaseAttack
 			m_animator.SetBool("IsAttacking", true);
 		}  
     }
-
 
 	void OnTriggerExit2D(Collider2D coll) 
 	{

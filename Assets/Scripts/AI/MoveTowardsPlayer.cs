@@ -44,4 +44,10 @@ public class MoveTowardsPlayer : MonoBehaviour
 			}
 		}	
 	}
+
+	// TODO Determine if this is required
+	private bool IsAttacking()
+	{
+		return true;
+	}
 }

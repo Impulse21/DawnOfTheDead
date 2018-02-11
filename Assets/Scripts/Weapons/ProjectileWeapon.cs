@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ProjectileWeapon : BaseWeaponFire 
 {
@@ -23,7 +21,6 @@ public class ProjectileWeapon : BaseWeaponFire
 	}
 	
 	// Update is called once per frame
-
 	public override void Shoot()
 	{
 		if(projectilePool != null)
