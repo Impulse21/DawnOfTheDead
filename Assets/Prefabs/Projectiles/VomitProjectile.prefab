@@ -74,7 +74,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.019145608, y: 0.057436883}
@@ -125,7 +125,7 @@ MonoBehaviour:
   impactDamage: 50
   doesDamage: 1
   damageRadius: 1
-  explosion: {fileID: 1190439745215766, guid: 57fdbe373447a4f7b8515b47c5d71159, type: 2}
+  explosion: {fileID: 1317899685171004, guid: 6a72b28ce6dfd40aaa220098d8c612dd, type: 2}
 --- !u!212 &212562275993197838
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -15,9 +15,9 @@ public class ExplodeOnImpact : MonoBehaviour
 
     public GameObject explosion;
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        if (explodeTags.Contains(coll.gameObject.tag))
+        if (explodeTags.Contains(coll.gameObject.tag) || coll.gameObject.tag == ("Wall"))
         {
             if (explosion == null)
             {

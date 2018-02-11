@@ -8,13 +8,14 @@ public class RangedAttack : MonoBehaviour
 	public int projectileSpeed = 5;				// Projectile Speed
 	public float fireRate = 2.0f;
 	public string targetTag = "";				// Target to shoot tag
+    public float fireRange = 3.0f;                 // Distance to taraget
 
 	protected float timer;
 
 	private Animator m_animator;
 	private ObjectPool m_projectilePool; 		// Object Pool for projectile
 	private MoveTowardsPlayer m_movementComp;	// Reference to movement component
-	private bool targetInRange;
+    private Transform m_playerTransform;        // Player Transform
 	
 	// Use this for initialization
 	void Start () 
@@ -23,29 +24,27 @@ public class RangedAttack : MonoBehaviour
 		m_projectilePool = new ObjectPool(projectile, 10, limitedFire);
 		
 		m_movementComp = GetComponent<MoveTowardsPlayer>();
-		m_animator = GetComponent<Animator>();	
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if(targetInRange)
-		{
-			Debug.Log("Player is in range");
-			timer += Time.deltaTime;
+		m_animator = GetComponent<Animator>();
 
-			if(timer >= fireRate)
-			{
-				Shoot();
-				
-				timer = 0;
-			}
-		}
-		else
-		{
-			timer = 0;
-		}
-	}
+        m_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (IsPlayerInRange())
+        {
+            Debug.Log("Player is in range");
+            timer += Time.deltaTime;
+
+            if (timer >= fireRate)
+            {
+                Shoot();
+
+                timer = 0;
+            }
+        }
+    }
 
 	private void Shoot()
 	{
@@ -67,20 +66,12 @@ public class RangedAttack : MonoBehaviour
 		}
 	}
 
-		void OnTriggerEnter2D(Collider2D coll) 
-	{
-    	if (coll.gameObject.tag == targetTag)
-		{
-			targetInRange = true;
-		}  
+    private bool IsPlayerInRange()        
+    {
+        Vector3 distanceVector = m_playerTransform.position - transform.position;
+
+        Debug.Log("The distance to the player is " + distanceVector.magnitude);
+
+        return (distanceVector.magnitude <= fireRange);
     }
-
-
-	void OnTriggerExit2D(Collider2D coll) 
-	{
-    	if (coll.gameObject.tag == targetTag)
-		{
-			targetInRange = false;
-		}  
-    }	
 }
